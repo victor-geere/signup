@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -25,6 +26,12 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public User() {
+        this.username = "";
+        this.phone = "";
+        this.password = "";
     }
 
     public User(String username, String phone, String password) {

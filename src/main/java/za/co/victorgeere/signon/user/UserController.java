@@ -1,19 +1,26 @@
 package za.co.victorgeere.signon.user;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+
+@RestController
 @RequestMapping("/api")
 public class UserController {
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/user")
-    @ResponseBody
-    @Bean
-    public User getUser() {
-        return new User("guest", "000-000-0000", "");
+    public List<User> getUser(@RequestParam(value="username", defaultValue="guest") String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @PutMapping("/user")
+    public User putUser(@RequestBody User user) {
+        userRepository.save(user);
+        return user;
     }
 }

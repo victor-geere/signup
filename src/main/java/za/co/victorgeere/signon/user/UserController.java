@@ -1,4 +1,4 @@
-package za.co.victorgeere.signon;
+package za.co.victorgeere.signon.user;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;

@@ -22,8 +22,8 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
-
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-rest')

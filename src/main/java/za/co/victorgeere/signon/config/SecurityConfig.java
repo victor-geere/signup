@@ -11,8 +11,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                    .antMatchers("/**").permitAll()
+        httpSecurity.httpBasic().and().authorizeRequests()
+                .antMatchers("/h2/**").permitAll()
+                .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/users/**").hasRole("USER")
+                .and()
+                    .csrf().ignoringAntMatchers("/h2/**")
+                .and()
+                    .headers().frameOptions().sameOrigin()
                 .and()
                     .csrf().disable();
     }
@@ -20,8 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
+                .passwordEncoder(org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance())
                 .withUser("user").password("asdf").roles("USER")
                 .and()
                 .withUser("admin").password("asdf").roles("ADMIN", "USER");
     }
+
 }

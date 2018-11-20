@@ -23,16 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        /*
-        httpSecurity.httpBasic().and()
-                .authorizeRequests().anyRequest().authenticated()
-                .antMatchers("/h2/**").permitAll()
-                .and()
-                .csrf().disable()
-                .csrf().ignoringAntMatchers("/h2/**")
-                .and()
-                .headers().frameOptions().sameOrigin();
-*/
         httpSecurity.httpBasic().and().authorizeRequests().anyRequest().authenticated()
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()

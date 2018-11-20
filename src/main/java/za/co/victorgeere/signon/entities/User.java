@@ -1,4 +1,4 @@
-package za.co.victorgeere.signon.user;
+package za.co.victorgeere.signon.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

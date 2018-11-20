@@ -3,6 +3,7 @@ package za.co.victorgeere.signon.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import za.co.victorgeere.signon.entities.User;
 
 import java.util.logging.Logger;
 

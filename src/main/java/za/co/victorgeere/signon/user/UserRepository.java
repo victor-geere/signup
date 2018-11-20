@@ -8,5 +8,5 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    List<User> findByUsername(@Param("username") String username);
+    User findByUsername(@Param("username") String username);
 }

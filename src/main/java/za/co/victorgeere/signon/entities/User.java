@@ -1,4 +1,4 @@
-package za.co.victorgeere.signon.user;
+package za.co.victorgeere.signon.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +7,14 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private final String username;
     private final String phone;
-    private final String password;
+    private String password;
 
     public String getPhone() {
         return phone;
@@ -27,6 +28,16 @@ public class User {
         return username;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User() {
+        this.username = "";
+        this.phone = "";
+        this.password = "";
+    }
+
     public User(String username, String phone, String password) {
         this.username = username;
         this.phone = phone;
@@ -36,7 +47,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "Customer[username=%s, phone='%s', password='%s']",
+                "User[username=%s, phone='%s', password='%s']",
                 username, phone, password);
     }
 }

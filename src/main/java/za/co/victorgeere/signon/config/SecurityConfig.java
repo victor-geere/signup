@@ -23,7 +23,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic().and().authorizeRequests()
+        /*
+        httpSecurity.httpBasic().and()
+                .authorizeRequests().anyRequest().authenticated()
+                .antMatchers("/h2/**").permitAll()
+                .and()
+                .csrf().disable()
+                .csrf().ignoringAntMatchers("/h2/**")
+                .and()
+                .headers().frameOptions().sameOrigin();
+*/
+        httpSecurity.httpBasic().and().authorizeRequests().anyRequest().authenticated()
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/users/**").hasRole("USER")
@@ -37,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // return new BCryptPasswordEncoder();
-        return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder(12);
     }
 }

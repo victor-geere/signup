@@ -1,6 +1,7 @@
 package za.co.victorgeere.signon.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ public class UserController {
     @PutMapping("/user")
     public User putUser(@RequestBody User user) {
         logger.info("PUT /user");
+        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }

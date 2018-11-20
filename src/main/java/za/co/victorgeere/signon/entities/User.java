@@ -1,4 +1,4 @@
-package za.co.victorgeere.signon.user;
+package za.co.victorgeere.signon.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ public class User {
 
     private final String username;
     private final String phone;
-    private final String password;
+    private String password;
 
     public String getPhone() {
         return phone;
@@ -26,6 +26,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public User() {
@@ -43,7 +47,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "Customer[username=%s, phone='%s', password='%s']",
+                "User[username=%s, phone='%s', password='%s']",
                 username, phone, password);
     }
 }

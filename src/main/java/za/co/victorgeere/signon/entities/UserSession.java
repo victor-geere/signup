@@ -3,8 +3,7 @@ package za.co.victorgeere.signon.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SPRING_SESSION")
-public class SpringSession {
+public class UserSession {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PRIMARY_ID", nullable = false)
@@ -27,6 +26,9 @@ public class SpringSession {
 
     @Column(name = "PRINCIPAL_NAME")
     private String principalName;
+
+    @Column(name = "USERNAME")
+    private String username;
 
     public String getPrimaryId() {
         return primaryId;
@@ -56,7 +58,11 @@ public class SpringSession {
         return principalName;
     }
 
-    public SpringSession() {
+    public String getUsername() {
+        return username;
+    }
+
+    public UserSession() {
 
     }
 }

@@ -1,7 +1,6 @@
 package za.co.victorgeere.signon.authentication;
 
 import org.springframework.web.bind.annotation.*;
-import za.co.victorgeere.signon.entities.User;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -9,12 +8,12 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @PostMapping("/login")
-    public void postLogin(@RequestBody User user) {
+    public void postLogin() {
 
     }
 
-    @PostMapping("/logout/{id}")
-    public void postLogout(HttpSession session, @PathVariable String id) {
+    @PostMapping("/logout")
+    public void postLogout(HttpSession session) {
         session.invalidate();
     }
 }

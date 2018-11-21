@@ -1,5 +1,7 @@
 package za.co.victorgeere.signon.entities;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +31,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = new BCryptPasswordEncoder(12).encode(password);
     }
 
     public User() {
@@ -41,7 +43,7 @@ public class User {
     public User(String username, String phone, String password) {
         this.username = username;
         this.phone = phone;
-        this.password = password;
+        this.password = new BCryptPasswordEncoder(12).encode(password);
     }
 
     @Override

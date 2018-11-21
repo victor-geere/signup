@@ -6,22 +6,26 @@
 	},
 	"item": [
 		{
-			"name": "get user",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "put users",
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "GET",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n\"username\": \"user\",\n\"phone\": \"21234123412\",\n\"password\": \"asdf\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8080/api/user?username=user",
+					"raw": "http://127.0.0.1:8080/api/users",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -32,16 +36,58 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user"
-					],
-					"query": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
 						{
 							"key": "username",
-							"value": "user"
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "asdf",
+							"type": "string"
 						}
 					]
 				},
-				"description": "/user"
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
@@ -76,78 +122,7 @@
 			"response": []
 		},
 		{
-			"name": "put user",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"username\": \"newuser24\",\n\"phone\": \"21234123412\",\n\"password\": \"asdf\"\n}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8080/api/user",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"user"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "post login",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"asdf\"\n}"
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8080/api/login",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "post logout 0",
+			"name": "post logout",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -159,7 +134,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8080/api/logout/0",
+					"raw": "http://127.0.0.1:8080/api/logout",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -170,29 +145,13 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"logout",
-						"0"
+						"logout"
 					]
 				}
 			},
 			"response": []
 		}
 	],
-	"auth": {
-		"type": "basic",
-		"basic": [
-			{
-				"key": "password",
-				"value": "asdf",
-				"type": "string"
-			},
-			{
-				"key": "username",
-				"value": "user",
-				"type": "string"
-			}
-		]
-	},
 	"event": [
 		{
 			"listen": "prerequest",

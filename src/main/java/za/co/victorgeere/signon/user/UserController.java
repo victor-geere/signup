@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import za.co.victorgeere.signon.entities.User;
+import za.co.victorgeere.signon.entities.UserSession;
+import za.co.victorgeere.signon.session.SpringSessionRepository;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -16,16 +19,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/user")
-    public User getUser(@RequestParam(value="username", defaultValue="guest") String username) {
-        logger.info("GET /user");
-        return userRepository.findByUsername(username);
+    @Autowired
+    private SpringSessionRepository springSessionRepository;
+
+    @GetMapping("/users")
+    public List<UserSession> getUserSessions() {
+        logger.info("GET /users");
+        return springSessionRepository.getUserSessions();
     }
 
-    @PutMapping("/user")
-    public User putUser(@RequestBody User user) {
-        logger.info("PUT /user");
-        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+    @PutMapping("/users")
+    public User putUsers(@RequestBody User user) {
+        logger.info("PUT /users");
         userRepository.save(user);
         return user;
     }

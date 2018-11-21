@@ -30,8 +30,7 @@ public class UserController {
 
     @PutMapping("/users")
     public User putUsers(@RequestBody User user) {
-        logger.info("PUT /user");
-        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+        logger.info("PUT /users");
         userRepository.save(user);
         return user;
     }

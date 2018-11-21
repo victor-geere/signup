@@ -24,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic().and().authorizeRequests().anyRequest().authenticated()
-                .antMatchers("/api/sessions").hasRole("USER")
                 .antMatchers("/api/users/**").hasRole("USER")
                 .antMatchers("/h2/**").permitAll()
                 .and()

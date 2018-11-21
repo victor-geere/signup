@@ -8,15 +8,16 @@ import javax.persistence.*;
                 @ConstructorResult(
                         targetClass=UserSession.class,
                         columns={
-                                @ColumnResult(name="USERNAME"),
-                                @ColumnResult(name="SESSION_ID")
+                                @ColumnResult(name="SESSION_ID"),
+                                @ColumnResult(name="PHONE"),
+                                @ColumnResult(name="USERNAME")
                         }
                 )
         }
 )
 @NamedNativeQuery(
         name= "UserSession.getUserSessions",
-        query = "SELECT u.USERNAME, s.SESSION_ID from USER AS u left outer join SPRING_SESSION AS s on u.username = s.PRINCIPAL_NAME",
+        query = "SELECT u.USERNAME, u.PHONE, s.SESSION_ID from USER AS u left outer join SPRING_SESSION AS s on u.username = s.PRINCIPAL_NAME",
         resultSetMapping = "userSessionMapping")
 @Entity
 public class UserSession {
@@ -24,6 +25,9 @@ public class UserSession {
     @Id
     @Column(name = "SESSION_ID", nullable = false)
     private String sessionId;
+
+    @Column(name = "PHONE")
+    private String phone;
 
     @Column(name = "USERNAME")
     private String username;
@@ -36,12 +40,17 @@ public class UserSession {
         return username;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public UserSession() {
 
     }
 
-    public UserSession(String username, String sessionId) {
+    public UserSession(String sessionId, String phone, String username) {
         this.username = username;
+        this.phone = phone;
         this.sessionId = sessionId;
     }
 }

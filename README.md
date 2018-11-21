@@ -17,7 +17,7 @@ User Signup Project
     
     4.3 the users can now be viewed with the `get users` bookmark
     
-    4.5 use `post logout` to invalidate the current session
+    4.4 use `post logout` to invalidate the current session
 
 **API Contract**
 

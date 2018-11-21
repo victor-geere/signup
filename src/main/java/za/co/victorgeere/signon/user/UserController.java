@@ -3,11 +3,11 @@ package za.co.victorgeere.signon.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import za.co.victorgeere.signon.entities.SpringSession;
 import za.co.victorgeere.signon.entities.User;
 import za.co.victorgeere.signon.entities.UserSession;
 import za.co.victorgeere.signon.session.SpringSessionRepository;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -22,16 +22,10 @@ public class UserController {
     @Autowired
     private SpringSessionRepository springSessionRepository;
 
-    @GetMapping("/sessions")
-    public Iterable<SpringSession> getSessions() {
-        logger.info("GET /sessions");
-        return springSessionRepository.findSpringSession();
-    }
-
     @GetMapping("/users")
-    public Iterable<User> getUsers() {
+    public List<UserSession> getUserSessions() {
         logger.info("GET /users");
-        return userRepository.findAll();
+        return springSessionRepository.getUserSessions();
     }
 
     @PutMapping("/users")

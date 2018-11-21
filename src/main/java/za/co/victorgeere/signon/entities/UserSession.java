@@ -2,60 +2,34 @@ package za.co.victorgeere.signon.entities;
 
 import javax.persistence.*;
 
+@SqlResultSetMapping(
+        name="userSessionMapping",
+        classes={
+                @ConstructorResult(
+                        targetClass=UserSession.class,
+                        columns={
+                                @ColumnResult(name="USERNAME"),
+                                @ColumnResult(name="SESSION_ID")
+                        }
+                )
+        }
+)
+@NamedNativeQuery(
+        name= "UserSession.getUserSessions",
+        query = "SELECT u.USERNAME, s.SESSION_ID from USER AS u left outer join SPRING_SESSION AS s on u.username = s.PRINCIPAL_NAME",
+        resultSetMapping = "userSessionMapping")
 @Entity
 public class UserSession {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRIMARY_ID", nullable = false)
-    private String primaryId;
 
+    @Id
     @Column(name = "SESSION_ID", nullable = false)
     private String sessionId;
-
-    @Column(name = "CREATION_TIME", nullable = false)
-    private long creationTime;
-
-    @Column(name = "LAST_ACCESS_TIME", nullable = false)
-    private long lastAccessTime;
-
-    @Column(name = "MAX_INACTIVE_INTERVAL", nullable = false)
-    private long maxInactiveInterval;
-
-    @Column(name = "EXPIRY_TIME", nullable = false)
-    private long expiryTime;
-
-    @Column(name = "PRINCIPAL_NAME")
-    private String principalName;
 
     @Column(name = "USERNAME")
     private String username;
 
-    public String getPrimaryId() {
-        return primaryId;
-    }
-
     public String getSessionId() {
         return sessionId;
-    }
-
-    public long getCreationTime() {
-        return creationTime;
-    }
-
-    public long getLastAccessTime() {
-        return lastAccessTime;
-    }
-
-    public long getMaxInactiveInterval() {
-        return maxInactiveInterval;
-    }
-
-    public long getExpiryTime() {
-        return expiryTime;
-    }
-
-    public String getPrincipalName() {
-        return principalName;
     }
 
     public String getUsername() {
@@ -64,5 +38,10 @@ public class UserSession {
 
     public UserSession() {
 
+    }
+
+    public UserSession(String username, String sessionId) {
+        this.username = username;
+        this.sessionId = sessionId;
     }
 }
